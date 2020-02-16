@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import java.lang.Exception
+import java.util.regex.Pattern
 
 class MainActivity : AppCompatActivity() {
 
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 
         val entre:Button = findViewById(R.id.entre) as Button;
         entre.setOnClickListener {
-            ecuacion.setText(ecuacion.text.toString() + "/")
+
         }
 
         val resultB:Button = findViewById(R.id.result) as Button;
@@ -105,9 +106,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun validar(texto: String): Boolean{
-        /*if () {
+    fun concaternar(digito: String) {
+        ecuacion.setText(ecuacion.text.toString() + digito)
+    }
 
-        }*/ return true
+    fun validarSignos(texto: String): Boolean{
+        if (Pattern.matches("[/*-+]", ecuacion.text.toString())) {
+            Toast.makeText(this@MainActivity, "Presione el botón \"RESULT\" antes de continuar con otra operación.", Toast.LENGTH_SHORT).show()
+            return false;
+        }
+        return true;
+    }
+
+    fun validarEntrada(texto: String): Boolean {
+        if(resultado.text.toString().isEmpty()) {
+            Toast.makeText(this@MainActivity, "Por favor, primero ingrese algún valor numérico.", Toast.LENGTH_SHORT).show()
+            return false;
+        }
+        return true;
     }
 }
