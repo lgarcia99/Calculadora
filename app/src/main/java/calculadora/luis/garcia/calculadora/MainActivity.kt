@@ -87,21 +87,26 @@ class MainActivity : AppCompatActivity() {
                 val res = validarEntrada(ecuacion)
                 when {
                     res.isEmpty() -> throw Exception()
-                    else -> ecuacion.setText(res)
+                    else -> resultado.setText(res)
                 }
             } catch (e: Exception) {
             }
         }
         borrarB.setOnClickListener {
-            ecuacion.setText("")
-            resultado.setText("")
+            val entrada = ecuacion.text.toString()
+            if (!resultado.text.toString().isEmpty()) {
+                ecuacion.setText("")
+                resultado.setText("")
+            } else {
+                ecuacion.setText(entrada.substring(0, entrada.lastIndex))
+            }
         }
     }
 
     fun validarSignos(ecuacion: TextView): Boolean{
         val entrada = ecuacion.text.toString()
         if (entrada.contains("+") || entrada.contains("-") || entrada.contains("*") || entrada.contains("/")) {
-            if (entrada.isEmpty()) ecuacion.setText("0")
+            if (entrada == "0") ecuacion.setText("0")
             return false
         }
         return true
