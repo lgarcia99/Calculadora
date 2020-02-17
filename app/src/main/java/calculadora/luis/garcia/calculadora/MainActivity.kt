@@ -100,9 +100,9 @@ class MainActivity : AppCompatActivity() {
 
     fun validarSignos(ecuacion: TextView): Boolean{
         if (Pattern.matches("[/*-+]", ecuacion.text.toString())) {
-            return false;
+            return false
         }
-        return true;
+        return true
     }
 
     fun validarEntrada(ecuacion: TextView): String {
@@ -123,8 +123,8 @@ class MainActivity : AppCompatActivity() {
             split = entrada.split("-")
             result = (split[0].toInt() + split[1].toInt()).toString()
         }
-        else if(esSuma(entrada)){
-            split = entrada.split("+")
+        else if(esMultiplicacion(entrada)){
+            split = entrada.split("*")
             result = (split[0].toInt() + split[1].toInt()).toString()
         }
         else if(esDivision(entrada)) {
